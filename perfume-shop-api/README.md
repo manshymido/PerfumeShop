@@ -1,59 +1,270 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PerfumeShop API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive RESTful API for an e-commerce perfume shop built with Laravel 12. This API provides complete functionality for managing products, orders, payments, inventory, and user management.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🔐 **Authentication & Authorization**
+  - User registration and login
+  - Password reset functionality
+  - Role-based access control (Admin, User)
+  - Sanctum token-based authentication
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 🛍️ **Product Management**
+  - Browse products with filtering and pagination
+  - Product categories
+  - Product images
+  - Recently viewed products
+  - Recommended products
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 🛒 **Shopping Cart**
+  - Guest cart support
+  - Authenticated user cart
+  - Cart merging on login
+  - Real-time cart calculations
 
-## Learning Laravel
+- 💳 **Payment Processing**
+  - Stripe payment integration
+  - Payment intent creation and management
+  - Webhook handling for payment events
+  - Order validation before checkout
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- 📦 **Order Management**
+  - Order creation and tracking
+  - Order status history
+  - Order cancellation
+  - Invoice generation
+  - Order refunds (Admin)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- ⭐ **Reviews & Ratings**
+  - Product reviews
+  - Review management (create, update, delete)
+  - Review policies for ownership
 
-## Laravel Sponsors
+- ❤️ **Wishlist**
+  - Add/remove products from wishlist
+  - Move items from wishlist to cart
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- 📍 **Shipping Addresses**
+  - Multiple shipping addresses per user
+  - Address management (CRUD operations)
 
-### Premium Partners
+- 👨‍💼 **Admin Panel**
+  - Dashboard with statistics
+  - Product management (CRUD)
+  - Order management and status updates
+  - Inventory management
+  - Low stock alerts
+  - User management
+  - Role management
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- 📊 **Inventory Management**
+  - Stock tracking
+  - Low stock alerts via email
+  - Inventory updates
 
-## Contributing
+## Technology Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Framework**: Laravel 12
+- **PHP**: ^8.2
+- **Authentication**: Laravel Sanctum
+- **Payment**: Stripe PHP SDK
+- **API Documentation**: L5-Swagger (OpenAPI/Swagger)
+- **Database**: SQLite (default), supports MySQL/PostgreSQL
 
-## Code of Conduct
+## Requirements
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP >= 8.2
+- Composer
+- Node.js & NPM (for frontend assets)
+- Stripe account (for payment processing)
 
-## Security Vulnerabilities
+## Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/manshymido/PerfumeShop.git
+   cd PerfumeShop/perfume-shop-api
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Configure environment variables**
+   Edit `.env` file and set:
+   - Database configuration
+   - Stripe keys (`STRIPE_KEY`, `STRIPE_SECRET`, `STRIPE_WEBHOOK_SECRET`)
+   - Mail configuration
+   - App URL
+
+5. **Run migrations and seeders**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+6. **Generate API documentation**
+   ```bash
+   php artisan l5-swagger:generate
+   ```
+
+7. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
+
+   Or use the dev script:
+   ```bash
+   composer run dev
+   ```
+
+## API Documentation
+
+Once the application is running, you can access the Swagger API documentation at:
+```
+http://localhost:8000/api/documentation
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/v1/register` - Register a new user
+- `POST /api/v1/login` - Login user
+- `POST /api/v1/logout` - Logout user (authenticated)
+- `POST /api/v1/forgot-password` - Request password reset
+- `POST /api/v1/reset-password` - Reset password
+- `GET /api/v1/user` - Get authenticated user
+- `PUT /api/v1/user` - Update user profile
+
+### Products
+- `GET /api/v1/products` - List all products
+- `GET /api/v1/products/{id}` - Get product details
+- `GET /api/v1/products/recommended` - Get recommended products
+- `GET /api/v1/products/category/{categoryId}` - Get products by category
+- `GET /api/v1/products/recently-viewed` - Get recently viewed products (authenticated)
+
+### Categories
+- `GET /api/v1/categories` - List all categories
+- `GET /api/v1/categories/{id}` - Get category details
+
+### Cart
+- `GET /api/v1/cart` - Get cart items
+- `POST /api/v1/cart` - Add item to cart
+- `PUT /api/v1/cart/{id}` - Update cart item
+- `DELETE /api/v1/cart/{id}` - Remove cart item
+- `DELETE /api/v1/cart` - Clear cart
+- `POST /api/v1/cart/merge` - Merge guest cart with user cart (authenticated)
+
+### Orders
+- `GET /api/v1/orders` - Get user orders (authenticated)
+- `POST /api/v1/orders` - Create new order (authenticated)
+- `GET /api/v1/orders/{id}` - Get order details (authenticated)
+- `PUT /api/v1/orders/{id}/cancel` - Cancel order (authenticated)
+- `GET /api/v1/orders/{id}/invoice` - Get order invoice (authenticated)
+
+### Checkout
+- `POST /api/v1/checkout/validate` - Validate checkout data (authenticated)
+- `POST /api/v1/checkout/create-intent` - Create payment intent (authenticated)
+- `POST /api/v1/checkout/update-intent` - Update payment intent (authenticated)
+
+### Reviews
+- `GET /api/v1/products/{id}/reviews` - Get product reviews
+- `POST /api/v1/products/{id}/reviews` - Create review (authenticated)
+- `PUT /api/v1/reviews/{id}` - Update review (authenticated)
+- `DELETE /api/v1/reviews/{id}` - Delete review (authenticated)
+
+### Wishlist
+- `GET /api/v1/wishlist` - Get wishlist items (authenticated)
+- `POST /api/v1/wishlist` - Add to wishlist (authenticated)
+- `DELETE /api/v1/wishlist/{id}` - Remove from wishlist (authenticated)
+- `POST /api/v1/wishlist/{id}/move-to-cart` - Move item to cart (authenticated)
+
+### Shipping Addresses
+- `GET /api/v1/shipping-addresses` - List shipping addresses (authenticated)
+- `POST /api/v1/shipping-addresses` - Create shipping address (authenticated)
+- `GET /api/v1/shipping-addresses/{id}` - Get shipping address (authenticated)
+- `PUT /api/v1/shipping-addresses/{id}` - Update shipping address (authenticated)
+- `DELETE /api/v1/shipping-addresses/{id}` - Delete shipping address (authenticated)
+
+### Admin Endpoints
+All admin endpoints require authentication and admin role.
+
+- `GET /api/v1/admin/dashboard/stats` - Dashboard statistics
+- `GET /api/v1/admin/products` - List all products
+- `POST /api/v1/admin/products` - Create product
+- `PUT /api/v1/admin/products/{id}` - Update product
+- `DELETE /api/v1/admin/products/{id}` - Delete product
+- `GET /api/v1/admin/orders` - List all orders
+- `GET /api/v1/admin/orders/{id}` - Get order details
+- `PUT /api/v1/admin/orders/{id}/status` - Update order status
+- `POST /api/v1/admin/orders/{id}/refund` - Refund order
+- `GET /api/v1/admin/inventory` - List inventory
+- `GET /api/v1/admin/inventory/low-stock` - Get low stock products
+- `PUT /api/v1/admin/inventory/{id}` - Update inventory
+- `GET /api/v1/admin/users` - List all users
+- `PUT /api/v1/admin/users/{id}/role` - Update user role
+- `DELETE /api/v1/admin/users/{id}` - Deactivate user
+
+### Webhooks
+- `POST /api/v1/webhooks/stripe` - Stripe webhook handler
+
+## Rate Limiting
+
+- Public API endpoints: 60 requests per minute
+- Admin endpoints: 30 requests per minute
+
+## Testing
+
+Run the test suite:
+```bash
+composer test
+```
+
+Or use PHPUnit directly:
+```bash
+php artisan test
+```
+
+## Queue Jobs
+
+The application uses Laravel queues for:
+- Sending welcome emails
+- Sending order confirmation emails
+- Sending order status update emails
+- Sending low stock alert emails
+
+Start the queue worker:
+```bash
+php artisan queue:work
+```
+
+## Security Features
+
+- CSRF protection
+- Rate limiting
+- Input validation
+- Authorization policies
+- Secure password hashing
+- Token-based authentication
+- Webhook signature verification (Stripe)
 
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support
+
+For support, email support@perfumeshop.com or open an issue in the repository.
